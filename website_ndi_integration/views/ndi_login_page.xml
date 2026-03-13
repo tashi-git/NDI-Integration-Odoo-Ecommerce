@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="ndi_login_page" name="NDI Login Page">
+        <t t-call="website.layout">
+            <div class="container ndi-page-container mt-3 mb-4">
+
+                <div class="ndi-layout">
+
+                    <!-- LEFT SIDE -->
+                    <div class="ndi-left-panel">
+
+                        <div class="ndi-header">
+                            <a href="/web/login" class="ndi-back-btn">
+                                ← Back
+                            </a>
+
+                            <div class="ndi-left-badge">
+                                Secure Digital Identity
+                            </div>
+                        </div>
+
+                        <h2 class="ndi-left-title">
+                            Fast, secure access with <span>Bhutan NDI</span>
+                        </h2>
+
+                        <p class="ndi-left-desc">
+                            Log in using your Bhutan NDI Wallet without entering a password.
+                            Simply scan the QR code, approve the request in your wallet, and continue securely.
+                        </p>
+
+                        <div class="ndi-left-points">
+                            <div class="ndi-left-point">
+                                <div class="ndi-left-icon">🔐</div>
+                                <div>
+                                    <div class="ndi-left-point-title">Password-less login</div>
+                                    <div class="ndi-left-point-text">
+                                        No need to remember usernames and passwords for this flow.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ndi-left-point">
+                                <div class="ndi-left-icon">⚡</div>
+                                <div>
+                                    <div class="ndi-left-point-title">Quick verification</div>
+                                    <div class="ndi-left-point-text">
+                                        Approve the request in your wallet and continue in seconds.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ndi-left-point">
+                                <div class="ndi-left-icon">🛡️</div>
+                                <div>
+                                    <div class="ndi-left-point-title">Trusted and secure</div>
+                                    <div class="ndi-left-point-text">
+                                        Identity verification happens through Bhutan NDI Wallet.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT SIDE -->
+                    <div id="ndi_box" class="ndi-card-wrapper">
+                        <div class="ndi-card">
+
+                            <h4 class="ndi-title">
+                                Scan with <span>Bhutan NDI</span> Wallet
+                            </h4>
+
+                            <p class="ndi-subtitle">
+                                Use your wallet to scan the QR code and securely verify your identity.
+                            </p>
+
+                            <div class="ndi-qr-frame">
+                                <img id="ndi_qr_img"
+                                     src=""
+                                     alt="NDI QR Code"
+                                     class="ndi-qr-img"/>
+                            </div>
+
+                            <div class="ndi-video-wrap">
+                                <a id="ndi_open_btn"
+                                   href="#"
+                                   target="_blank"
+                                   class="ndi-video-btn">
+                                    Open with NDI
+                                </a>
+                            </div>
+
+                            <div class="ndi-status-wrap">
+                                <small id="ndi_status_text" class="ndi-status-text">
+                                    Scan QR with Bhutan NDI Wallet
+                                </small>
+                            </div>
+
+                            <div class="ndi-instructions">
+                                <ol>
+                                    <li>Open Bhutan NDI Wallet</li>
+                                    <li>Tap the Scan button</li>
+                                    <li>Scan the QR and share your identity</li>
+                                </ol>
+                            </div>
+
+                            <div class="ndi-download-text">Download now!</div>
+
+                            <div class="ndi-store-badges">
+                                <a href="https://play.google.com/store/apps/details?id=com.bhutanndi&amp;pcampaignid=web_share"
+                                   target="_blank">
+                                    <img src="/website_ndi_integration/static/src/img/playstore.png"
+                                         alt="Get it on Google Play"/>
+                                </a>
+
+                                <a href="https://apps.apple.com/na/app/bhutan-ndi/id1645493166"
+                                   target="_blank">
+                                    <img src="/website_ndi_integration/static/src/img/appstore.png"
+                                         alt="Download on the App Store"/>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="ndi_error_box"
+                     class="alert alert-danger mt-3"
+                     style="display:none;"></div>
+
+                <div id="ndi_loader_overlay"
+                     class="ndi-loader-overlay"
+                     style="display:none;">
+                    <div class="ndi-loader-content">
+                        <div class="ndi-loader-spinner"></div>
+                        <div id="ndi_loader_text" class="ndi-loader-text">
+                            Verifying your identity...
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <script type="text/javascript"><![CDATA[
+                document.addEventListener("DOMContentLoaded", async function () {
+                    const errorBox = document.getElementById("ndi_error_box");
+                    const qrImg = document.getElementById("ndi_qr_img");
+                    const openBtn = document.getElementById("ndi_open_btn");
+                    const statusText = document.getElementById("ndi_status_text");
+                    const loader = document.getElementById("ndi_loader_overlay");
+                    const loaderText = document.getElementById("ndi_loader_text");
+
+                    let pollTimer = null;
+                    let qrGenerated = false;
+
+                    function showLoader(message) {
+                        if (loader) {
+                            loader.style.display = "flex";
+                        }
+                        if (loaderText && message) {
+                            loaderText.innerText = message;
+                        }
+                    }
+
+                    function hideLoader() {
+                        if (loader) {
+                            loader.style.display = "none";
+                        }
+                    }
+
+                    async function createProofAndRefreshQr() {
+                        const response = await fetch("/ndi/login/create-proof", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({})
+                        });
+
+                        const data = await response.json();
+
+                        if (!response.ok || !data.ok) {
+                            throw new Error(data.error || "Failed to create proof");
+                        }
+
+                        qrImg.src = data.qr_src + "?t=" + Date.now();
+                        openBtn.href = data.deep_link_url;
+                        return data;
+                    }
+
+                    async function pollStatus() {
+                        try {
+                            const response = await fetch("/ndi/login/status", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({})
+                            });
+
+                            const data = await response.json();
+                            const result = data.result || data || {};
+
+                            console.log("NDI STATUS:", result);
+
+                            if (result.status === "validated") {
+                                const successMessage = result.message || "Login successful. Redirecting...";
+
+                                statusText.innerText = successMessage;
+                                showLoader(successMessage);
+
+                                if (pollTimer) {
+                                    clearInterval(pollTimer);
+                                    pollTimer = null;
+                                }
+
+                                setTimeout(function () {
+                                    window.location.href = result.redirect_url || "/";
+                                }, 1200);
+
+                                return;
+                            }
+
+                            if (result.status === "pending") {
+                                if (statusText.innerText === "Scan QR with Bhutan NDI Wallet") {
+                                    return;
+                                }
+                                statusText.innerText = result.message || "Waiting for wallet approval...";
+                                return;
+                            }
+
+                            if (result.status === "rejected") {
+                                hideLoader();
+                                statusText.innerText = "User rejected request";
+
+                                if (pollTimer) {
+                                    clearInterval(pollTimer);
+                                    pollTimer = null;
+                                }
+                                return;
+                            }
+
+                            if (result.status === "error") {
+                                hideLoader();
+                                statusText.innerText = result.message || "Verification failed";
+
+                                if (pollTimer) {
+                                    clearInterval(pollTimer);
+                                    pollTimer = null;
+                                }
+                                return;
+                            }
+
+                            if (result.status === "missing") {
+                                hideLoader();
+                                statusText.innerText = "Session expired. Please try again.";
+
+                                if (pollTimer) {
+                                    clearInterval(pollTimer);
+                                    pollTimer = null;
+                                }
+                                return;
+                            }
+
+                            statusText.innerText = "Scan QR with Bhutan NDI Wallet";
+                        } catch (err) {
+                            console.log("NDI status poll error:", err);
+                        }
+                    }
+
+                    try {
+                        errorBox.style.display = "none";
+                        errorBox.innerText = "";
+                        hideLoader();
+
+                        statusText.innerText = "Generating NDI QR...";
+
+                        await createProofAndRefreshQr();
+
+                        statusText.innerText = "Scan QR with Bhutan NDI Wallet";
+
+                        qrGenerated = true;
+                        pollTimer = setInterval(pollStatus, 2000);
+
+                    } catch (err) {
+                        errorBox.style.display = "block";
+                        errorBox.innerText = err.message || "Something went wrong";
+                        hideLoader();
+                    }
+                });
+            ]]></script>
+        </t>
+    </template>
+</odoo>

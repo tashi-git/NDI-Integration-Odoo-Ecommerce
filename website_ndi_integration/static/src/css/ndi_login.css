@@ -1,0 +1,600 @@
+body{
+    background:linear-gradient(180deg, #f8fffb 0%, #f4fbf7 100%);
+    font-family:Arial, sans-serif;
+}
+
+/* PAGE */
+
+.ndi-page-container{
+    max-width:1280px;
+    margin:0 auto;
+    padding:10px 20px 30px;
+}
+
+/* HEADER ROW ON LEFT */
+
+.ndi-header{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:14px;
+}
+
+.ndi-back-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:#55c98c !important;
+    color:#ffffff !important;
+    border:none !important;
+    border-radius:10px !important;
+    padding:8px 16px !important;
+    font-size:13px;
+    font-weight:700;
+    text-decoration:none !important;
+    box-shadow:0 8px 18px rgba(85, 201, 140, 0.18);
+    transition:background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ndi-back-btn:hover,
+.ndi-back-btn:focus,
+.ndi-back-btn:active{
+    background:#44b67b !important;
+    color:#ffffff !important;
+    text-decoration:none !important;
+    transform:translateY(-1px);
+    box-shadow:0 10px 22px rgba(85, 201, 140, 0.24);
+}
+
+/* MAIN 2-COLUMN LAYOUT */
+
+.ndi-layout{
+    display:grid;
+    grid-template-columns:minmax(0, 1fr) 620px;
+    gap:42px;
+    align-items:start;
+}
+
+/* LEFT PANEL */
+
+.ndi-left-panel{
+    padding-top:6px;
+}
+
+.ndi-left-badge{
+    display:inline-block;
+    padding:7px 12px;
+    border-radius:999px;
+    background:#eaf8f0;
+    color:#2f7a55;
+    font-size:12px;
+    font-weight:700;
+    border:1px solid #cfeedd;
+}
+
+.ndi-left-title{
+    font-size:42px;
+    line-height:1.12;
+    font-weight:800;
+    color:#1f2937;
+    margin:0 0 18px 0;
+    max-width:560px;
+    letter-spacing:-0.5px;
+}
+
+.ndi-left-title span{
+    color:#55c98c;
+}
+
+.ndi-left-desc{
+    font-size:17px;
+    line-height:1.8;
+    color:#6b7280;
+    margin:0 0 26px 0;
+    max-width:560px;
+}
+
+.ndi-left-points{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    max-width:560px;
+}
+
+.ndi-left-point{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    padding:16px 18px;
+    background:#ffffff;
+    border:1px solid #e6f1ea;
+    border-radius:16px;
+    box-shadow:0 8px 22px rgba(18, 42, 35, 0.05);
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ndi-left-point:hover{
+    transform:translateY(-2px);
+    box-shadow:0 14px 28px rgba(18, 42, 35, 0.08);
+}
+
+.ndi-left-icon{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background:#eefaf3;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    flex-shrink:0;
+}
+
+.ndi-left-point-title{
+    font-size:16px;
+    font-weight:700;
+    color:#1f2937;
+    margin-bottom:4px;
+}
+
+.ndi-left-point-text{
+    font-size:14px;
+    line-height:1.7;
+    color:#6b7280;
+}
+
+/* RIGHT CARD */
+
+.ndi-card-wrapper{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+}
+
+.ndi-card{
+    width:100%;
+    max-width:620px;
+    background:#ffffff;
+    border:1px solid #e6f1ea;
+    border-radius:24px;
+    box-shadow:0 24px 60px rgba(18, 42, 35, 0.10);
+    text-align:center;
+    padding:30px 28px 26px;
+    position:relative;
+    overflow:hidden;
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ndi-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:5px;
+    background:linear-gradient(90deg, #55c98c 0%, #2F7A74 100%);
+}
+
+.ndi-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 28px 70px rgba(18, 42, 35, 0.14);
+}
+
+.ndi-title{
+    font-size:32px;
+    font-weight:800;
+    color:#1f2937;
+    margin:0 0 8px 0;
+    line-height:1.2;
+    letter-spacing:-0.4px;
+}
+
+.ndi-title span{
+    color:#55c98c;
+}
+
+.ndi-subtitle{
+    max-width:430px;
+    margin:0 auto 16px;
+    color:#6b7280;
+    font-size:15px;
+    line-height:1.65;
+}
+
+.ndi-qr-frame{
+    border:2px solid #d8f3e4;
+    border-radius:20px;
+    padding:14px;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(180deg, #ffffff 0%, #fbfffc 100%);
+    margin-bottom:14px;
+    box-shadow:0 10px 24px rgba(85, 201, 140, 0.10);
+}
+
+.ndi-qr-img{
+    width:220px;
+    height:220px;
+    object-fit:contain;
+    display:block;
+}
+
+.ndi-video-wrap{
+    margin:0 0 10px 0;
+}
+
+.ndi-video-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:140px;
+    height:42px;
+    padding:0 22px;
+    border-radius:999px;
+    background:#55c98c;
+    color:#ffffff !important;
+    font-size:13px;
+    font-weight:700;
+    text-decoration:none !important;
+    border:none;
+    box-shadow:0 8px 20px rgba(85, 201, 140, 0.20);
+    transition:background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ndi-video-btn:hover{
+    background:#44b67b;
+    color:#ffffff !important;
+    transform:translateY(-1px);
+    box-shadow:0 12px 24px rgba(85, 201, 140, 0.26);
+}
+
+.ndi-status-wrap{
+    margin:0 0 14px 0;
+    text-align:center;
+}
+
+.ndi-status-text{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    padding:11px 18px;
+    border-radius:999px;
+    background:linear-gradient(180deg, #eefaf3 0%, #e7f8ee 100%);
+    border:1px solid #cdeedb;
+    color:#2f7a55;
+    font-size:13px;
+    font-weight:700;
+    min-width:260px;
+    box-shadow:0 8px 20px rgba(85, 201, 140, 0.10);
+    animation:ndi-status-pulse 1.8s ease-in-out infinite;
+    position:relative;
+}
+
+.ndi-status-text::before{
+    content:"";
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#55c98c;
+    box-shadow:0 0 0 0 rgba(85, 201, 140, 0.5);
+    animation:ndi-dot-ping 1.5s infinite;
+    flex-shrink:0;
+}
+
+.ndi-instructions{
+    max-width:320px;
+    margin:0 auto 12px;
+    color:#6b7280;
+    font-size:14px;
+    line-height:1.7;
+    text-align:left;
+    background:#f9fdfb;
+    border:1px solid #e4f4ea;
+    border-radius:14px;
+    padding:14px 16px;
+}
+
+.ndi-instructions ol{
+    margin:0;
+    padding-left:20px;
+}
+
+.ndi-instructions li + li{
+    margin-top:6px;
+}
+
+.ndi-download-text{
+    color:#9aa0a6;
+    font-size:12px;
+    margin:8px 0 8px;
+}
+
+.ndi-store-badges{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:0;
+}
+
+.ndi-store-badges img{
+    height:36px;
+    width:auto;
+    display:block;
+    transition:transform 0.2s ease;
+}
+
+.ndi-store-badges img:hover{
+    transform:translateY(-2px);
+}
+
+/* LOGIN BUTTON ON NORMAL LOGIN PAGE */
+
+.ndi-login-btn {
+    width: 100%;
+    height: 38px;
+    border: none;
+    border-radius: 6px;
+    background: #1E4F4B;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: none;
+    transition: background 0.2s ease;
+}
+
+.ndi-login-btn:hover {
+    background: #2F7A74;
+}
+
+.ndi-login-btn:focus,
+.ndi-login-btn:active {
+    outline: none;
+    box-shadow: none;
+    background: #1E4F4B;
+}
+
+.ndi-login-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.ndi-login-btn-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    display: inline-block;
+}
+/* LOADER */
+
+.ndi-loader-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(255,255,255,0.90);
+    backdrop-filter:blur(4px);
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.ndi-loader-content{
+    text-align:center;
+    background:#ffffff;
+    border:1px solid #e8f2ec;
+    border-radius:20px;
+    padding:28px 34px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.10);
+    min-width:260px;
+}
+
+.ndi-loader-spinner{
+    width:56px;
+    height:56px;
+    margin:0 auto 16px auto;
+    border:5px solid #e5e7eb;
+    border-top:5px solid #55c98c;
+    border-radius:50%;
+    animation:ndi-spin 0.8s linear infinite;
+}
+
+.ndi-loader-text{
+    font-size:16px;
+    font-weight:700;
+    color:#333333;
+}
+
+/* ANIMATIONS */
+
+@keyframes ndi-spin{
+    0%{ transform:rotate(0deg); }
+    100%{ transform:rotate(360deg); }
+}
+
+@keyframes ndi-status-pulse{
+    0%{
+        opacity:0.82;
+        transform:scale(1);
+        box-shadow:0 8px 20px rgba(85, 201, 140, 0.10);
+    }
+    50%{
+        opacity:1;
+        transform:scale(1.02);
+        box-shadow:0 12px 28px rgba(85, 201, 140, 0.16);
+    }
+    100%{
+        opacity:0.82;
+        transform:scale(1);
+        box-shadow:0 8px 20px rgba(85, 201, 140, 0.10);
+    }
+}
+
+@keyframes ndi-dot-ping{
+    0%{
+        box-shadow:0 0 0 0 rgba(85, 201, 140, 0.45);
+    }
+    70%{
+        box-shadow:0 0 0 10px rgba(85, 201, 140, 0);
+    }
+    100%{
+        box-shadow:0 0 0 0 rgba(85, 201, 140, 0);
+    }
+}
+
+/* TABLET */
+
+@media (max-width: 1100px){
+    .ndi-page-container{
+        padding:12px 16px 28px;
+    }
+
+    .ndi-layout{
+        grid-template-columns:1fr;
+        gap:28px;
+    }
+
+    .ndi-left-panel{
+        text-align:center;
+        padding-top:0;
+    }
+
+    .ndi-header{
+        justify-content:center;
+    }
+
+    .ndi-left-title,
+    .ndi-left-desc,
+    .ndi-left-points{
+        max-width:100%;
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .ndi-left-title{
+        font-size:34px;
+    }
+
+    .ndi-card{
+        max-width:680px;
+        margin:0 auto;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 768px){
+    .ndi-page-container{
+        padding:12px 12px 24px;
+    }
+
+    .ndi-header{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:10px;
+    }
+
+    .ndi-left-title{
+        font-size:28px;
+    }
+
+    .ndi-left-desc{
+        font-size:15px;
+        margin-bottom:20px;
+    }
+
+    .ndi-left-point{
+        padding:14px;
+        text-align:left;
+    }
+
+    .ndi-card{
+        max-width:100%;
+        padding:26px 18px 22px;
+        border-radius:18px;
+    }
+
+    .ndi-title{
+        font-size:27px;
+    }
+
+    .ndi-subtitle{
+        font-size:14px;
+        margin-bottom:14px;
+    }
+
+    .ndi-qr-frame{
+        padding:12px;
+        border-radius:18px;
+    }
+
+    .ndi-qr-img{
+        width:195px;
+        height:195px;
+    }
+
+    .ndi-instructions{
+        max-width:100%;
+        font-size:13px;
+        padding:13px 14px;
+    }
+
+    .ndi-status-text{
+        min-width:auto;
+        width:100%;
+        font-size:13px;
+        padding:11px 16px;
+    }
+
+    .ndi-store-badges img{
+        height:34px;
+    }
+
+    .ndi-login-btn{
+        gap:12px;
+    }
+
+    .ndi-login-btn-icon{
+        width:72px;
+        height:72px;
+    }
+
+    .ndi-login-btn span{
+        font-size:20px;
+    }
+}
+
+@media (max-width: 480px){
+    .ndi-title{
+        font-size:24px;
+    }
+
+    .ndi-left-title{
+        font-size:24px;
+    }
+
+    .ndi-qr-img{
+        width:172px;
+        height:172px;
+    }
+
+    .ndi-video-btn{
+        width:100%;
+        max-width:220px;
+    }
+
+    .ndi-login-btn-icon{
+        width:64px;
+        height:64px;
+    }
+
+    .ndi-login-btn span{
+        font-size:18px;
+    }
+}
