@@ -44,9 +44,9 @@ Navigate to:
 Add the following parameters:
 
 Parameter	Description:
-ndi.access_token - Access token generated using the authenticator service
-ndi.base_url - Base URL for NDI API
-ndi.schema_name - Schema used for identity verification
-ndi.webhook_id - Unique webhook identifier
-ndi.webhook_token	- Token used to validate webhook requests
+   - ndi.access_token - Access token generated using the authenticator service
+   - ndi.base_url - Base URL for NDI API
+   - ndi.schema_name - Schema used for identity verification
+   - ndi.webhook_id - Unique webhook identifier
+   - ndi.webhook_token	- Token used to validate webhook requests
 
